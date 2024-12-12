@@ -1,0 +1,32 @@
+### Listar usuários de uma empresa
+GET http://localhost:8090/api/user/users
+
+### Criar um novo usuário
+POST http://localhost:8090/api/users
+Content-Type: application/json
+
+{
+  "name": "Novo Usuário",
+  "email": "novo@email.com"
+}
+
+### Listar todos os usuários
+GET http://localhost:8090/api/users
+Authorization: Bearer <token>
+
+### Buscar um usuário pelo ID
+GET http://localhost:8090/api/users/123
+Authorization: Bearer <token>
+
+### Atualizar um usuário
+PUT http://localhost:8090/api/users/123
+Content-Type: application/json
+Authorization: Bearer <token>
+
+{
+  "name": "Usuário Atualizado"
+}
+
+### Deletar um usuário
+DELETE http://localhost:8090/api/users/123
+Authorization: Bearer <token>
