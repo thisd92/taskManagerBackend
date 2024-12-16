@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-const Company = require("../models/company");
-const Squad = require("../models/squad");
+import { Company } from "../models/company";
+import { Squad } from "../models/squad";
 
 const findSquadService = async (
   req: Request,

@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-const Project = require("../models/project");
-const Task = require("../models/task");
-const authService = require("./authService");
+import { Project } from "../models/project";
+import { Task } from "../models/task";
+import { readToken } from "./tokenService";
 
-const findTasksByProject = async (
+const findTasksByProjectService = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -21,7 +21,7 @@ const findTasksByProject = async (
   }
 };
 
-const findAllTasks = async (
+const findAllTasksService = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -37,7 +37,7 @@ const findAllTasks = async (
   }
 };
 
-const save = async (req: Request, res: Response, next: NextFunction) => {
+const saveTaskService = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id, company } = req.body.user;
     if (!id) {
@@ -74,7 +74,7 @@ const save = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const update = async (req: Request, res: Response, next: NextFunction) => {
+const updateTaskService = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const {
       params: { id },
@@ -94,7 +94,7 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const deleteTask = async (req: Request, res: Response, next: NextFunction) => {
+const deleteTaskService = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const {
       params: { id },
@@ -116,7 +116,7 @@ const deleteTask = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const findTaskById = async (
+const findTaskByIdService = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -126,7 +126,10 @@ const findTaskById = async (
       params: { id },
     } = req;
     const token = req.headers.authorization;
-    const decodedToken = authService.readToken(token);
+    if (!token) {
+      return;
+    }
+    const decodedToken = readToken(token);
     const { company } = decodedToken;
     const task = await Task.findOne({ _id: id, "createdBy.company": company });
     if (!task) {
@@ -141,11 +144,11 @@ const findTaskById = async (
   }
 };
 
-module.exports = {
-  save,
-  findAllTasks,
-  findTasksByProject,
-  findTaskById,
-  deleteTask,
-  update,
+export {
+  saveTaskService,
+  findAllTasksService,
+  findTasksByProjectService,
+  findTaskByIdService,
+  deleteTaskService,
+  updateTaskService,
 };

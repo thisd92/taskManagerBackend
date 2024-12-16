@@ -15,12 +15,12 @@ const router = Router();
 router.use(cookieParser());
 
 router.use("/auth", authRouter);
-router.use("/company", companyRouter);
-router.use("/profile", profileRouter);
-router.use("/project", projectRouter);
-router.use("/squad", squadRouter);
-router.use("/task", taskRouter);
-router.use("/user", userRouter);
+router.use("/companies", companyRouter);
+router.use("/profiles", profileRouter);
+router.use("/projects", projectRouter);
+router.use("/squads", squadRouter);
+router.use("/tasks", taskRouter);
+router.use("/users", userRouter);
 
 // ------------------------ PROTECTED ROUTE ------------------------
 

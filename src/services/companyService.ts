@@ -2,7 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import { Company } from "../models/company";
 import { MongoError } from "mongodb";
 
-const create = async (req: Request, res: Response, next: NextFunction) => {
+const createCompanyService = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const company = new Company(req.body);
     await company.save();
@@ -18,7 +22,11 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const findAll = async (req: Request, res: Response, next: NextFunction) => {
+const findAllCompanyService = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const companys = await Company.find();
     res.json(companys);
@@ -27,4 +35,4 @@ const findAll = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-module.exports = { create, findAll };
+export { createCompanyService, findAllCompanyService };

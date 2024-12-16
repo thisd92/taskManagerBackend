@@ -1,62 +1,79 @@
 import { Request, Response, NextFunction } from "express";
-const taskService = require("../services/taskService");
+import {
+  deleteTaskService,
+  findAllTasksService,
+  findTaskByIdService,
+  findTasksByProjectService,
+  saveTaskService,
+  updateTaskService,
+} from "../services/taskService";
 
-exports.findTasksByProject = async (
+const findTasksByProject = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    await taskService.findTasksByProject(req, res, next);
+    await findTasksByProjectService(req, res, next);
   } catch (error) {
     next(error);
   }
 };
 
-exports.findAllTasks = async (
+const findAllTasks = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    await taskService.findAllTasks(req, res, next);
+    await findAllTasksService(req, res, next);
   } catch (error) {
     next(error);
   }
 };
 
-exports.save = async (req: Request, res: Response, next: NextFunction) => {
+const saveTask = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await taskService.save(req, res, next);
+    await saveTaskService(req, res, next);
   } catch (error) {
     next(error);
   }
 };
 
-exports.update = async (req: Request, res: Response, next: NextFunction) => {
+const updateTask = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await taskService.update(req, res, next);
+    await updateTaskService(req, res, next);
   } catch (error) {
     next(error);
   }
 };
 
-exports.delete = async (req: Request, res: Response, next: NextFunction) => {
+const deleteTask = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await taskService.delete(req, res, next);
+    await deleteTaskService(req, res, next);
   } catch (error) {
     next(error);
   }
 };
 
-exports.findTaskById = async (
+const findTaskById = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    await taskService.findTaskById(req, res, next);
+    await findTaskByIdService(req, res, next);
   } catch (error) {
     next(error);
   }
+};
+
+export {
+  findTaskById,
+  deleteTask,
+  updateTask,
+  saveTask,
+  findAllTasks,
+  findTaskByIdService,
+  findTasksByProject,
 };

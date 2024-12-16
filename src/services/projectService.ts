@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from "express";
+import { Company } from "../models/company";
+import { Project } from "../models/project";
 
-const Company = require("../models/company");
-const Project = require("../models/project");
-
-const save = async (req: Request, res: Response, next: NextFunction) => {
+const saveProjectService = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id, company } = req.body.user;
     if (!id) {
@@ -35,7 +34,11 @@ const save = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const findProjectsByCompany = async (req: Request, res: Response, next: NextFunction) => {
+const findProjectsByCompanyService = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { id, company } = req.body.user;
     const projects = await Project.find({ "createdBy.company": company });
@@ -45,7 +48,7 @@ const findProjectsByCompany = async (req: Request, res: Response, next: NextFunc
   }
 };
 
-const update = async (req: Request, res: Response, next: NextFunction) => {
+const updateProjectService = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const {
       params: { id },
@@ -67,7 +70,11 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const deleteProject = async (req: Request, res: Response, next: NextFunction) => {
+const deleteProjectService = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const {
       params: { id },
@@ -89,7 +96,11 @@ const deleteProject = async (req: Request, res: Response, next: NextFunction) =>
   }
 };
 
-const findProjectById = async (req: Request, res: Response, next: NextFunction) => {
+const findProjectByIdService = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const {
       params: { id },
@@ -111,4 +122,10 @@ const findProjectById = async (req: Request, res: Response, next: NextFunction) 
   }
 };
 
-module.exports = {findProjectById, findProjectsByCompany, save, deleteProject, update}
+export {
+  findProjectByIdService,
+  findProjectsByCompanyService,
+  saveProjectService,
+  deleteProjectService,
+  updateProjectService,
+};

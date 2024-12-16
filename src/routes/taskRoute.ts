@@ -1,18 +1,24 @@
+import {
+  deleteTask,
+  findAllTasks,
+  findTaskById,
+  findTasksByProject,
+  saveTask,
+  updateTask,
+} from "../controllers/taskController";
 import { authenticate } from "../middlewares/authenticate";
 import { Router } from "express";
 
 export const taskRouter = Router();
-const taskController = require("../controllers/taskController");
 
-taskRouter.get("/tasks", authenticate, taskController.findTasksByProject);
+taskRouter.get("/", authenticate, findTasksByProject);
 
-taskRouter.get("/allTasks", authenticate, taskController.findAllTasks);
+taskRouter.get("/allTasks", authenticate, findAllTasks);
 
-taskRouter.post("/tasks", authenticate, taskController.save);
+taskRouter.post("/", authenticate, saveTask);
 
-taskRouter.put("/tasks/:id", authenticate, taskController.update);
+taskRouter.put("/:id", authenticate, updateTask);
 
-taskRouter.delete("/tasks/:id", authenticate, taskController.delete);
+taskRouter.delete("/:id", authenticate, deleteTask);
 
-taskRouter.get("/tasks/:id", authenticate, taskController.findTaskById);
-
+taskRouter.get("/:id", authenticate, findTaskById);

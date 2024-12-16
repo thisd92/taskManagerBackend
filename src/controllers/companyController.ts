@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-const companyService = require("../services/companyService");
+import {
+  createCompanyService,
+  findAllCompanyService,
+} from "../services/companyService";
 
 export const createCompany = async (
   req: Request,
@@ -7,7 +10,7 @@ export const createCompany = async (
   next: NextFunction
 ) => {
   try {
-    await companyService.create(req, res, next);
+    await createCompanyService(req, res, next);
   } catch (error) {
     next(error);
   }
@@ -19,7 +22,7 @@ export const findAllCompanies = async (
   next: NextFunction
 ) => {
   try {
-    await companyService.findAll(req, res, next);
+    await findAllCompanyService(req, res, next);
   } catch (error) {
     next(error);
   }

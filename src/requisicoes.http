@@ -15,7 +15,7 @@ GET http://localhost:8090/api/users
 Authorization: Bearer <token>
 
 ### Buscar um usuário pelo ID
-GET http://localhost:8090/api/users/123
+GET http://localhost:8090/api/users/1
 Authorization: Bearer <token>
 
 ### Atualizar um usuário

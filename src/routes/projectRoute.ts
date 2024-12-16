@@ -10,12 +10,12 @@ import {
 
 export const projectRouter = Router();
 
-projectRouter.get("/projects", authenticate, findProjectsByCompany);
+projectRouter.get("/", authenticate, findProjectsByCompany);
 
-projectRouter.post("/projects", authenticate, saveProject);
+projectRouter.post("/", authenticate, saveProject);
 
-projectRouter.put("/projects/:id", authenticate, updateProject);
+projectRouter.put("/:id", authenticate, updateProject);
 
-projectRouter.delete("/projects/:id", authenticate, deleteProject);
+projectRouter.delete("/:id", authenticate, deleteProject);
 
-projectRouter.get("/projects/:id", authenticate, findProjectById);
+projectRouter.get("/:id", authenticate, findProjectById);

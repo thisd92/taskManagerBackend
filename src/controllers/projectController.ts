@@ -1,42 +1,67 @@
 import { Request, Response, NextFunction } from "express";
+import {
+  deleteProjectService,
+  findProjectByIdService,
+  findProjectsByCompanyService,
+  saveProjectService,
+  updateProjectService,
+} from "../services/projectService";
 
-const projectService = require("../services/projectService");
-
-export const saveProject = async (req: Request, res: Response, next: NextFunction) => {
+export const saveProject = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    await projectService.save(req, res, next);
+    await saveProjectService(req, res, next);
   } catch (error) {
     next(error);
   }
 };
 
-export const findProjectsByCompany = async (req: Request, res: Response, next: NextFunction) => {
+export const findProjectsByCompany = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    await projectService.findProjectsByCompany(req, res, next);
+    await findProjectsByCompanyService(req, res, next);
   } catch (error) {
     next(error);
   }
 };
 
-export const updateProject = async (req: Request, res: Response, next: NextFunction) => {
+export const updateProject = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    await projectService.update(req, res, next);
+    await updateProjectService(req, res, next);
   } catch (error) {
     next(error);
   }
 };
 
-export const deleteProject = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteProject = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    await projectService.deleteProject(req, res, next);
+    await deleteProjectService(req, res, next);
   } catch (error) {
     next(error);
   }
 };
 
-export const findProjectById = async (req: Request, res: Response, next: NextFunction) => {
+export const findProjectById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    await projectService.findProjectById(req, res, next);
+    await findProjectByIdService(req, res, next);
   } catch (error) {
     next(error);
   }

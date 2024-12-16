@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { createToken } from "./tokenService"; 
-
-const Company = require("../models/company");
-const User = require("../models/user");
-const bcrypt = require("bcrypt");
+import { createToken } from "./tokenService";
+import { Company } from "../models/company";
+import { User } from "../models/user";
+import * as bcrypt from "bcrypt";
 
 export const signinService = async (
   req: Request,

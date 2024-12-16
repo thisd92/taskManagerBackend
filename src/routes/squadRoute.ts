@@ -11,14 +11,14 @@ import {
 
 export const squadRouter = Router();
 
-squadRouter.get("/squad", authenticate, findSquad);
+squadRouter.get("/", authenticate, findSquad);
 
-squadRouter.get("/squads", authenticate, findAllSquad);
+squadRouter.get("/", authenticate, findAllSquad);
 
-squadRouter.post("/squad", authenticate, saveSquad);
+squadRouter.post("/", authenticate, saveSquad);
 
-squadRouter.put("/squad/:id", authenticate, updateSquad);
+squadRouter.put("/:id", authenticate, updateSquad);
 
-squadRouter.delete("/squad/:id", authenticate, deleteSquad);
+squadRouter.delete("/:id", authenticate, deleteSquad);
 
-squadRouter.get("/squad/:id", authenticate, findSquadById);
+squadRouter.get("/:id", authenticate, findSquadById);

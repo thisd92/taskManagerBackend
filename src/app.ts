@@ -20,19 +20,14 @@ async function main(): Promise<void> {
 
 app.use(express.json());
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000",);
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  app.use(
-    cors({
-      origin: "http://localhost:3000",
-      methods: ["GET", "PUT", "POST", "DELETE"],
-      allowedHeaders: ["Content-Type", "Authorization"],
-      credentials: true,
-    })
-  );
-  next();
-});
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "PUT", "POST", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 app.use("/api", routes);
 

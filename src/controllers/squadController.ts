@@ -1,10 +1,16 @@
 import { Request, Response, NextFunction } from "express";
-
-const squadService = require("../services/squadService");
+import {
+  deleteSquadService,
+  findAllSquadsService,
+  findSquadByIdService,
+  findSquadService,
+  saveSquadService,
+  updateSquadService,
+} from "../services/squadService";
 
 const findSquad = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await squadService.findSquad(req, res, next);
+    await findSquadService(req, res, next);
   } catch (error) {
     next(error);
   }
@@ -16,7 +22,7 @@ const findAllSquad = async (
   next: NextFunction
 ) => {
   try {
-    await squadService.findAllSquads(req, res, next)(req, res, next);
+    await findAllSquadsService(req, res, next);
   } catch (error) {
     next(error);
   }
@@ -24,14 +30,14 @@ const findAllSquad = async (
 
 const saveSquad = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await squadService.save(req, res, next);
+    await saveSquadService(req, res, next);
   } catch (error) {
     next(error);
   }
 };
 const updateSquad = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await squadService.update(req, res, next);
+    await updateSquadService(req, res, next);
   } catch (error) {
     next(error);
   }
@@ -39,7 +45,7 @@ const updateSquad = async (req: Request, res: Response, next: NextFunction) => {
 
 const deleteSquad = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await squadService.deleteSquad(req, res, next);
+    await deleteSquadService(req, res, next);
   } catch (error) {
     next(error);
   }
@@ -51,7 +57,7 @@ const findSquadById = async (
   next: NextFunction
 ) => {
   try {
-    await squadService.findSquadById(req, res, next);
+    await findSquadByIdService(req, res, next);
   } catch (error) {
     next(error);
   }
