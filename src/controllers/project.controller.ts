@@ -5,7 +5,7 @@ import {
   findProjectsByCompanyService,
   saveProjectService,
   updateProjectService,
-} from "../services/projectService";
+} from "../services/project.service";
 
 export const saveProject = async (
   req: Request,

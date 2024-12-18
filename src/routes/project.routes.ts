@@ -6,7 +6,7 @@ import {
   findProjectsByCompany,
   saveProject,
   updateProject,
-} from "../controllers/projectController";
+} from "../controllers/project.controller";
 
 export const projectRouter = Router();
 

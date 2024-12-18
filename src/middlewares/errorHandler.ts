@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { CustomError } from "../utils/CustomError";
 
 // Middleware de tratamento de erros
 export function errorHandler(
@@ -7,6 +8,12 @@ export function errorHandler(
   res: Response,
   next: NextFunction
 ) {
-  console.error(err.stack);
-  res.status(500).json({ error: true, message: "Erro no servidor" });
+  const status = err instanceof CustomError ? err.status : 500;
+  const message = err.message || "Erro interno do servidor";
+
+  console.error(`[Error] ${status} - ${message}`);
+  res.status(status).json({
+    error: true,
+    message,
+  });
 }

@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { createToken } from "./tokenService";
-import { Company } from "../models/company";
-import { User } from "../models/user";
+import { createToken } from "./token.service";
+import { Company } from "../models/company.model";
+import { User } from "../models/user.model";
 import * as bcrypt from "bcrypt";
+import { CustomError } from "../utils/CustomError";
 
 export const signinService = async (
   req: Request,
@@ -11,29 +12,23 @@ export const signinService = async (
 ) => {
   try {
     const { body: userLogin } = req;
-    const company = await Company.findOne({ name: userLogin.companyName });
-    if (!company) {
-      return res.status(401).json({ message: "Empresa inválida" });
-    }
+
+    const company = await Company.findOne({ name: userLogin.company });
+    if (!company) throw new CustomError("Empresa inválida", 401);
 
     const user = await User.findOne({ email: userLogin.email });
-
-    if (!user) {
-      return res.status(401).json({ message: "Email ou senha inválidos" });
-    }
+    if (!user) throw new CustomError("Email ou senha inválidos", 401);
 
     const isPasswordValid = await bcrypt.compare(
       userLogin.password,
       user.password
     );
 
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: "Email ou senha inválidos" });
-    }
+    if (!isPasswordValid)
+      throw new CustomError("Email ou senha inválidos", 401);
 
-    if (String(company._id) !== String(user.company)) {
-      return res.status(401).json({ message: "Empresa inválida" });
-    }
+    if (String(company._id) !== String(user.company))
+      throw new CustomError("Empresa inválida", 401);
 
     const token = createToken(user);
 
@@ -61,9 +56,8 @@ export const forgetService = async (
     } = req;
     const user = await User.findOne({ email: email });
 
-    if (!user) {
-      res.status(400).send("Email inválido");
-    }
+    if (!user) throw new CustomError("Email inválido", 401);
+
     res.status(200).json(user);
   } catch (error) {
     next(error);

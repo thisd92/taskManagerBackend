@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import {
   createCompanyService,
   findAllCompanyService,
-} from "../services/companyService";
+} from "../services/company.service";
 
 export const createCompany = async (
   req: Request,

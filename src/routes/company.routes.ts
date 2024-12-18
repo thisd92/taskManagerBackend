@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   createCompany,
   findAllCompanies,
-} from "../controllers/companyController";
+} from "../controllers/company.controller";
 
 export const companyRouter = Router();
 

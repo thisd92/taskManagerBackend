@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { readToken } from "./tokenService";
+import { readToken } from "./token.service";
+import { CustomError } from "../utils/CustomError";
 
 export const findProfile = async (
   req: Request,
@@ -11,12 +12,8 @@ export const findProfile = async (
     if (token) {
       const decodedToken = readToken(token);
       const { id } = decodedToken;
-      if (!id) {
-        res.status(404).json({
-          error: true,
-          message: "Usuário não encontrado",
-        });
-      }
+      if (!id) throw new CustomError("Usuário não encontrado", 404);
+
       res.status(200).json(id);
     }
   } catch (error) {

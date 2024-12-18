@@ -1,13 +1,13 @@
 import Router, { Request, Response, NextFunction } from "express";
 import cookieParser from "cookie-parser";
 import { authenticate } from "../middlewares/authenticate";
-import { authRouter } from "./authRoute";
-import { companyRouter } from "./companyRoute";
-import { profileRouter } from "./profileRoute";
-import { projectRouter } from "./projectRoute";
-import { squadRouter } from "./squadRoute";
-import { taskRouter } from "./taskRoute";
-import { userRouter } from "./userRoute";
+import { authRouter } from "./auth.routes";
+import { companyRouter } from "./company.routes";
+import { profileRouter } from "./profile.routes";
+import { projectRouter } from "./project.routes";
+import { squadRouter } from "./squad.routes";
+import { taskRouter } from "./task.routes";
+import { userRouter } from "./user.routes";
 import { errorHandler } from "../middlewares/errorHandler";
 
 const router = Router();

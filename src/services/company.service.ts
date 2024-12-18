@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Company } from "../models/company";
+import { Company } from "../models/company.model";
 import { MongoError } from "mongodb";
 
 const createCompanyService = async (

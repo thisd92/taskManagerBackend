@@ -1,4 +1,4 @@
-import { IUser } from "../models/user";
+import { IUser } from "../models/user.model";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 const SECRET: string = process.env.JWT_SECRET!;

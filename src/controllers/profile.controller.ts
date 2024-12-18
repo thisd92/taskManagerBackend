@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { findProfile } from "../services/profileService";
+import { findProfile } from "../services/profile.service";
 
 export const profileController = async (
   req: Request,

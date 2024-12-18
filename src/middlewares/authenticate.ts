@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { JwtPayload } from "jsonwebtoken";
-import { readToken } from "../services/tokenService";
-import { IUser } from "../models/user";
+import { readToken } from "../services/token.service";
+import { IUser } from "../models/user.model";
 
 export interface AuthRequest extends Request {
   body: {

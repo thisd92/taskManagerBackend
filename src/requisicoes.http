@@ -27,6 +27,6 @@ Authorization: Bearer <token>
   "name": "Usuário Atualizado"
 }
 
-### Deletar um usuário
-DELETE http://localhost:8090/api/users/123
-Authorization: Bearer <token>
+### Pesquisar tarefa
+GET http://localhost:8090/api/tasks/64962910996d31f3f924e916
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjFjYzUzMWI3MTdmOTgxOTNmM2QwZSIsImNvbXBhbnkiOiI2NDg3YzliNzNhNGU0NDg2YmFhMzM5ZGYiLCJlbWFpbCI6InRoaWFnb0Bnb29nbGUuY29tIiwibmFtZSI6IlRoaWFnbyIsImlhdCI6MTczNDQ3Nzk1M30.pEBOa8xV9pcN8v5NiXJgwpn0Sf67sNa4fAqELWYyLo0

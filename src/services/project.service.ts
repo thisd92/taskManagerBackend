@@ -1,17 +1,18 @@
 import { Request, Response, NextFunction } from "express";
-import { Company } from "../models/company";
-import { Project } from "../models/project";
+import { Company } from "../models/company.model";
+import { Project } from "../models/project.model";
+import { CustomError } from "../utils/CustomError";
 
-const saveProjectService = async (req: Request, res: Response, next: NextFunction) => {
+const saveProjectService = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { id, company } = req.body.user;
-    if (!id) {
-      return res.status(401).json({ message: "Usuário inválido" });
-    }
+    if (!id) throw new CustomError("Usuário inválido", 401);
 
-    if (!company) {
-      return res.status(401).json({ message: "Empresa inválida" });
-    }
+    if (!company) throw new CustomError("Empresa inválida", 401);
 
     const newProject = new Project({
       ...req.body,
@@ -48,7 +49,11 @@ const findProjectsByCompanyService = async (
   }
 };
 
-const updateProjectService = async (req: Request, res: Response, next: NextFunction) => {
+const updateProjectService = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const {
       params: { id },
@@ -58,12 +63,8 @@ const updateProjectService = async (req: Request, res: Response, next: NextFunct
       new: true,
     });
 
-    if (!project) {
-      res.status(404).json({
-        error: true,
-        message: "Project não encontrada",
-      });
-    }
+    if (!project) throw new CustomError("Projeto não encontrado", 404);
+
     res.status(200).json(project);
   } catch (error) {
     next(error);
@@ -81,15 +82,10 @@ const deleteProjectService = async (
     } = req;
     const project = await Project.findByIdAndDelete(id);
 
-    if (!project) {
-      return res.status(404).json({
-        error: true,
-        message: "Project não encontrada",
-      });
-    }
+    if (!project) throw new CustomError("Projeto não encontrado", 404);
 
     res.status(200).json({
-      message: "Project deletada com sucesso",
+      message: "Projeto deletado com sucesso",
     });
   } catch (error) {
     next(error);
@@ -110,12 +106,8 @@ const findProjectByIdService = async (
       _id: id,
       "createdBy.company": company,
     });
-    if (!project) {
-      return res.status(404).json({
-        error: true,
-        message: "Projeto não encontrado",
-      });
-    }
+    if (!project) throw new CustomError("Projeto não encontrado", 404);
+
     res.status(200).json(project);
   } catch (error) {
     next(error);
